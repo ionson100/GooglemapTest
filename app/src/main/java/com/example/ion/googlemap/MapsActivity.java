@@ -32,11 +32,11 @@ public class MapsActivity extends AppCompatActivity
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,GoogleApiClient.ConnectionCallbacks, LocationListener  {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
-    GoogleApiClient mGoogleApiClient;
-    Marker mLocationMarker;
-    Location mLastLocation;
-    LocationRequest mLocationRequest;
-    Location myLocation;
+    private GoogleApiClient mGoogleApiClient;
+    private Marker mLocationMarker;
+    private Location mLastLocation;
+    private LocationRequest mLocationRequest;
+    private Location myLocation;
     /**
      * Request code for location permission request.
      *
@@ -79,7 +79,8 @@ public class MapsActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-
+      //  56.4247666
+       // 61.9205122
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
 
@@ -92,6 +93,8 @@ public class MapsActivity extends AppCompatActivity
             }
         });
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        mMap.animateCamera(CameraUpdateFactory.
+//                newLatLngZoom(new LatLng(56.4247666, 61.9205122), 15.0f));
 
 
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
@@ -105,6 +108,7 @@ public class MapsActivity extends AppCompatActivity
                 // the camera will update and center on the user’s current location//
 
                 mMap.setMyLocationEnabled(true);
+                buildGoogleApiClient();
             }
         }
         else {
@@ -212,6 +216,8 @@ public class MapsActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
+                       mMap.animateCamera(CameraUpdateFactory.
+                       newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 15.0f));
         if (mLocationMarker != null) {
             mLocationMarker.remove();
         }
