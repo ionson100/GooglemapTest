@@ -56,7 +56,7 @@ public class MapsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
         SupportMapFragment mapFragment =
@@ -97,7 +97,7 @@ public class MapsActivity extends AppCompatActivity
 //                newLatLngZoom(new LatLng(56.4247666, 61.9205122), 15.0f));
 
 
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
@@ -108,7 +108,7 @@ public class MapsActivity extends AppCompatActivity
                 // the camera will update and center on the user’s current location//
 
                 mMap.setMyLocationEnabled(true);
-                buildGoogleApiClient();
+               // buildGoogleApiClient();
             }
         }
         else {
